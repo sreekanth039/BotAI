@@ -1,16 +1,135 @@
-# React + Vite
+# 🤖 Bot AI – Chat Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern chat application built using **React** and **Material UI**, featuring AI-style responses, chat ratings, detailed feedback, and complete chat history stored in `localStorage`.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 💬 Chat Engine
 
-## React Compiler
+- Auto-scrolling conversation UI
+- Human + AI styled message bubbles
+- Suggested quick prompts
+- Time formatting using `date-fns`
+- Responsive layout for mobile + desktop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧠 AI Response Logic
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Uses a local JSON file (`sampleData.json`) as a Q/A dataset
+- Exact-match search for user questions
+- Fallback message when no answer is found
+- Each message includes:
+  - `type` (Human / AI)
+  - `text`
+  - `id`
+  - `time`
+  - optional: `rating`, `feedback`
+
+---
+
+## ⭐ Ratings & Feedback
+
+- 👍 Thumbs-up reaction
+- ⭐ 1–5 star rating for AI messages
+- 📝 Additional text feedback using a modal
+- Rating + feedback stored directly in the message
+- Read-only mode when shown in history view
+
+---
+
+## 💾 Chat Saving System
+
+- Save full chat sessions to **localStorage**
+- Saves:
+  - Entire chat array
+  - Timestamp
+  - Feedback and ratings
+- Shows snackbar confirmation
+- Provides link to conversation history
+
+---
+
+## 📚 Chat History
+
+- Displays all saved sessions
+- Groups chats by:
+  - Today
+  - Yesterday
+  - or formatted date (`do LLL yyyy`)
+- Shows each message using `ChattingCard` in read-only mode
+
+---
+
+## 🔍 Filter System
+
+- Filter conversation history by rating:
+  - All Ratings
+  - 1★, 2★, 3★, 4★, 5★
+- Uses `.some()` to check whether any message in a chat has the selected rating
+
+---
+
+## 🎨 UI & Theme
+
+- Built using **Material UI (MUI)**
+- Consistent theme for:
+  - Buttons
+  - Cards
+  - Modals
+  - Typography
+- Light/Dark mode toggle via `ThemeContext`
+- Smooth hover and animation effects
+
+---
+
+## 📱 Mobile-Friendly Sidebar
+
+- Collapsible sidebar for smaller screens
+- Contains:
+  - New Chat
+  - History
+  - Theme Toggle
+- Sidebar auto-closes after selection
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+│
+├── components/
+│   ├── ChatInput/
+│   │   └── ChatInput.jsx
+│   ├── ChattingCard/
+│   │   └── ChattingCard.jsx
+│   ├── FeedbackModal/
+│   │   └── FeedbackModal.jsx
+│   ├── ChatHistoryCard/
+│   │   └── ChatHistoryCard.jsx
+│   ├── ChatFilter/
+│   │   └── ChatFilter.jsx
+│   ├── InitialChat/
+│   │   └── InitialChat.jsx
+│   ├── Sidebar/
+│   │   └── Sidebar.jsx
+│   ├── Navbar/
+│       └── Navbar.jsx
+│
+├── aiData/
+│   └── sampleData.json
+│
+├── pages/
+│   ├── Home/
+│   │   └── Home.jsx
+│   └── History/
+│       └── History.jsx
+│
+├── theme/
+│   └── ThemeContext.js
+│
+├── App.js
+└── index.js
+
+```
